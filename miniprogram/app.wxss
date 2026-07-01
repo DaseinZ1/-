@@ -1,0 +1,26 @@
+/**app.wxss**/
+.container {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+} 
+
+button {
+  background: initial;
+}
+
+button:focus{
+  outline: 0;
+}
+
+button::after{
+  border: none;
+}
+
+page {
+  background: #f6f6f6;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
