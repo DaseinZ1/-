@@ -1,0 +1,77 @@
+<view class="container">
+  <view class="form-section">
+    <view class="form-item">
+      <text class="label">记录你的美好瞬间吧</text>
+      <textarea 
+        class="textarea" 
+        placeholder="写下你获得的成就，完成的事务，发生的事情..." 
+        value="{{content}}"
+        bindinput="onInputContent"
+        maxlength="500"
+        auto-height
+      />
+    </view>
+    
+    <view class="image-section">
+      <text class="label">添加图片</text>
+      <view class="image-picker">
+        <view class="image-preview" wx:if="{{imageUrl}}">
+          <image class="preview-img" src="{{imageUrl}}" mode="aspectFill"></image>
+          <text class="delete-img" bindtap="deleteImage">×</text>
+        </view>
+        <view class="add-image" wx:else bindtap="chooseImage">
+          <text class="add-icon">+</text>
+          <text class="add-text">{{uploading ? '上传中...' : '选择图片'}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="star-preview" wx:if="{{starRating > 0}}">
+      <text class="preview-label">当前心情星级：</text>
+      <text class="star" wx:for="{{starRating}}" wx:key="index">★</text>
+    </view>
+  </view>
+
+  <view class="submit-btn" bindtap="submitAchievement">
+    <text>{{editId ? '保存修改' : '完成记录'}}</text>
+  </view>
+
+  <view class="star-picker-mask" wx:if="{{showStarPicker}}" bindtap="cancelStarPicker"></view>
+  <view class="star-picker" wx:if="{{showStarPicker}}">
+    <view class="picker-header">
+      <text class="picker-title">选择心情星级</text>
+      <text class="picker-subtitle">代表此刻心情的程度</text>
+    </view>
+    <view class="star-row">
+      <text 
+        class="star-item {{starRating >= 1 ? 'active' : ''}}" 
+        data-star="1"
+        bindtap="selectStar"
+      >★</text>
+      <text 
+        class="star-item {{starRating >= 2 ? 'active' : ''}}" 
+        data-star="2"
+        bindtap="selectStar"
+      >★</text>
+      <text 
+        class="star-item {{starRating >= 3 ? 'active' : ''}}" 
+        data-star="3"
+        bindtap="selectStar"
+      >★</text>
+      <text 
+        class="star-item {{starRating >= 4 ? 'active' : ''}}" 
+        data-star="4"
+        bindtap="selectStar"
+      >★</text>
+      <text 
+        class="star-item {{starRating >= 5 ? 'active' : ''}}" 
+        data-star="5"
+        bindtap="selectStar"
+      >★</text>
+    </view>
+    <view class="picker-btns">
+      <text class="btn-cancel" bindtap="cancelStarPicker">取消</text>
+      <text class="btn-confirm" bindtap="confirmRating">确认归档</text>
+    </view>
+  </view>
+</view>
