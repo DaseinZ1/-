@@ -1,0 +1,34 @@
+<view class="container">
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <view class="detail-content" wx:if="{{!loading && achievement}}">
+    <view class="detail-header">
+      <view class="star-display">
+        <text class="star" wx:for="{{achievement.starArray}}" wx:key="index">★</text>
+      </view>
+    </view>
+
+    <view class="detail-image" wx:if="{{achievement.imageUrl}}">
+      <image class="detail-img" src="{{achievement.imageUrl}}" mode="aspectFill"></image>
+    </view>
+
+    <view class="detail-body">
+      <text class="detail-text">{{achievement.content}}</text>
+    </view>
+
+    <view class="detail-footer">
+      <text class="detail-date">记录于 {{achievement.createTime}}</text>
+    </view>
+  </view>
+
+  <view class="btn-group">
+    <view class="edit-btn" bindtap="editAchievement">
+      <text>编辑</text>
+    </view>
+    <view class="back-btn" bindtap="goBack">
+      <text>返回列表</text>
+    </view>
+  </view>
+</view>
