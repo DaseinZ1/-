@@ -1,0 +1,104 @@
+<view class="container">
+  <view class="header">
+    <view class="menu-btn" bindtap="toggleMenu">
+      <view class="menu-line"></view>
+      <view class="menu-line"></view>
+      <view class="menu-line"></view>
+    </view>
+    <view class="header-title">
+      <text class="title">我的时刻</text>
+      <text class="subtitle">记录每一个精彩瞬间</text>
+    </view>
+  </view>
+
+  <view class="menu-mask" wx:if="{{showMenu}}" bindtap="closeMenu"></view>
+  <view class="side-menu" wx:if="{{showMenu}}">
+    <view class="menu-header">
+      <text class="menu-title">按时间筛选</text>
+      <text class="menu-close" bindtap="closeMenu">×</text>
+    </view>
+    <view class="menu-content">
+      <view class="year-list">
+        <view 
+          class="year-item {{selectedYear === item ? 'active' : ''}}"
+          wx:for="{{years}}" 
+          wx:key="item"
+          bindtap="selectYear"
+          data-year="{{item}}"
+        >
+          <text class="year-text">{{item}}年</text>
+          <text class="year-arrow">{{selectedYear === item ? '▼' : '▶'}}</text>
+        </view>
+        <view class="month-list" wx:if="{{selectedYear}}">
+          <view 
+            class="month-item {{selectedMonth === item ? 'active' : ''}}"
+            wx:for="{{months}}" 
+            wx:key="item"
+            bindtap="selectMonth"
+            data-month="{{item}}"
+          >
+            <text class="month-text">{{item}}月</text>
+          </view>
+        </view>
+      </view>
+      <view class="clear-filter" bindtap="clearFilter">
+        <text>清除筛选</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="achievement-list" wx:if="{{!loading}}">
+    <view class="stats-card">
+      <view class="stat-item">
+        <text class="stat-value">{{stats.totalCount}}</text>
+        <text class="stat-label">总记录</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">{{stats.thisMonthCount}}</text>
+        <text class="stat-label">本月新增</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <view class="stat-stars">
+          <text class="star" wx:for="{{stats.avgStarArray}}" wx:key="index">★</text>
+        </view>
+        <text class="stat-label">平均心情</text>
+      </view>
+    </view>
+
+    <view 
+      class="achievement-card" 
+      wx:for="{{achievements}}" 
+      wx:key="_id"
+      bindtap="goToDetail"
+      data-id="{{item._id}}"
+    >
+      <view class="card-header">
+        <view class="star-rating">
+          <text class="star" wx:for="{{item.starArray}}" wx:key="index">★</text>
+        </view>
+      </view>
+      <view class="card-content">
+        <text class="achievement-desc">{{item.content}}</text>
+      </view>
+      <view class="card-footer">
+        <text class="achievement-date">{{item.createTime}}</text>
+        <text class="delete-btn" bindtap="deleteAchievement" data-id="{{item._id}}" catchtap="deleteAchievement">删除</text>
+      </view>
+    </view>
+
+    <view class="empty-tip" wx:if="{{achievements.length === 0}}">
+      <text>还没有时刻记录</text>
+      <text class="empty-hint">点击下方按钮开始记录</text>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <view class="add-btn" bindtap="goToAddAchievement">
+    <text class="add-icon">+</text>
+  </view>
+</view>
