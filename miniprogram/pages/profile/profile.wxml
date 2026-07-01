@@ -1,0 +1,60 @@
+<view class="container">
+  <view class="user-section">
+    <text class="section-title">我的</text>
+    <view class="user-info" wx:if="{{hasUserInfo}}">
+      <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+      <text class="nickname">{{userInfo.nickName}}</text>
+      <text class="user-desc">记录美好，成就自己</text>
+    </view>
+    <view class="login-btn" wx:else bindtap="getUserProfile">
+      <text class="login-text">点击登录</text>
+    </view>
+  </view>
+
+  <view class="stats-section">
+    <view class="stat-card">
+      <text class="stat-value">{{stats.totalCount}}</text>
+      <text class="stat-label">记录总数</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-card">
+      <text class="stat-value">{{stats.avgRating}}</text>
+      <text class="stat-label">平均心情</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-card">
+      <text class="stat-value">{{stats.highRatingCount}}</text>
+      <text class="stat-label">高光时刻</text>
+    </view>
+  </view>
+
+  <view class="menu-section">
+    <view class="menu-item" bindtap="clearCache">
+      <text class="menu-text">清除缓存</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <button class="share-btn" open-type="share">
+      <text class="menu-text">分享给好友</text>
+      <text class="menu-arrow">></text>
+    </button>
+  </view>
+
+  <view class="about-section">
+    <view class="about-item">
+      <text class="about-text">版本号</text>
+      <text class="about-value">1.0.0</text>
+    </view>
+    <view class="about-item">
+      <text class="about-text">开发团队</text>
+      <text class="about-value">私人成就系统</text>
+    </view>
+    <view class="about-item">
+      <text class="about-text">联系我们</text>
+      <text class="about-value">点击反馈</text>
+    </view>
+  </view>
+
+  <view class="footer">
+    <text class="footer-text">用心记录每一个美好瞬间</text>
+  </view>
+</view>
